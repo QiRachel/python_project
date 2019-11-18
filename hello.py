@@ -1648,6 +1648,7 @@ pip uninstall Flask
 virtualenv
 pipenv
 """
+<<<<<<< HEAD
 """
 virtualenv
 不同的包版本
@@ -1838,3 +1839,382 @@ print(list(map(charToNum, "23443")))
 r1 = reduce(fn, map(charToNum, "23443"))
 print(r1)
 print(type(r1))
+=======
+
+#   ######################类
+# #类的属性和方法
+# __bases__ 用于返回一个元组显示所继承的所有父类
+# class Cat(object):
+"""
+class Cat:
+    # 类的属性
+    tag = 'cat base'
+
+    # 构造方法
+    def __init__(self, name, age):
+        # 实例化的属性
+        self.name = name
+        self.__age = age    # 私有变量，无法直接访问修改，可以定义方法获得修改
+        pass
+
+    def set_age(self, age):
+        self.__age = age
+        print("我的年龄:{}岁".format(self.__age))
+
+    def show(self):
+        print("我叫{}，今年{}岁".format(self.name, self.__age))
+
+    def eat(self):
+        print("猫喜欢吃鱼")
+
+
+    # 析构方法
+    def __del__(self):
+        pass
+
+class Tiger(Cat):
+    pass
+
+if __name__ == "__main__":
+    # cat = Cat()
+    # cat.eat()
+    cat = Cat('money',3)
+    cat.eat()   # 猫喜欢吃鱼
+    cat.show()  # 我叫money，今年3岁
+
+    print(cat.name) # money
+    cat.name = "huahua"
+    print(cat.name) # huahua
+
+    # print(cat.__age) # 私有变量AttributeError: 'Cat' object has no attribute '__age'
+    cat.__age = 5
+    cat.show()  # 我叫huahua，今年3岁
+
+    cat.set_age(5)
+    cat.show()  # 我叫huahua，今年5岁
+    print(isinstance(cat, Cat))     # True
+
+    tiger = Tiger('huaniu',10)
+    print(isinstance(tiger, Cat))   #True
+"""
+
+# #类的实例判断
+# isinstance(o,c)
+"""
+class Vehicle(object):
+    # 自定义Vehicle类属性
+    trans_type = 'SUV'
+
+    # 自定义实例的初始化方法
+    def __init__(self, speed=0, size=()):
+        self.speed = speed
+        self.size = size
+
+    # 自定义实例方法show_info，打印实例的速度和体积
+    def show_info(self):
+        # print(type(self))
+        print("我的所属属性为{}，速度：{}km/h，体积：{}".format(self.trans_type, self.speed, self.size))
+
+    # 自定义实例方法move,打印“我已向前移动了50米”
+    def move(self):
+        print("我已向前移动了50米")
+
+    # 自定义实例方法set_speed，设置对应的速度值
+    def set_speed(self, new_speed):
+        self.speed = new_speed
+
+    # 自定义实例方法get_speed，打印当前的速度值
+    def get_speed(self):
+        print("我的时速为： {}km/h".format(self.speed))
+
+    # 自定义实例方法speed_up，实现对实例的加速
+    def speed_up(self):
+        old_speed = self.speed
+        self.speed += 10
+        print("我的速度由{} km/提升到了{} km/h".format(old_speed, self.speed))
+
+    # 自定义实例方法speed_down，实现对实例的减速
+    def speed_down(self):
+        old_speed = self.speed
+        self.speed -= 15
+        print("我的速度由{} km/下降到了{} km/h".format(old_speed, self.speed))
+
+    # 自定义实例方法transport_identify，实现对实例所属类型的判断
+    def transport_identify(self):
+        if isinstance(self, Vehicle):
+            print("类型匹配")
+        else:
+            print("类型不匹配")
+
+
+if __name__ == "__main__":
+    tool_1 = Vehicle(20, (3.6, 1.9, 1.75))
+    # 调用实例方法 打印实例的速度和体积
+    tool_1.show_info()
+    # 调用实例方法 实现实例的前移
+    tool_1.move()
+    tool_1.set_speed(40)
+    # 调用实例方法 打印当前速度
+    tool_1.get_speed()
+    # 调用实例方法 对实例进行加速
+    tool_1.speed_up()
+    # 调用实例方法 对实例进行减速
+    tool_1.speed_down()
+    # 调用实例方法 判断当前实例的类型
+    tool_1.transport_identify()
+"""
+
+# ######类的继承
+# 子类的判断 issubclass(cls=,classinfo=)
+# 调用父类的方法
+# def fun(self):
+#     super(父类，self).fun()
+"""
+class BaseCat(object):
+    '''
+    猫科动物的基础类
+    '''
+    tag = "猫科动物"
+
+    def __init__(self, name):
+        self.name = name
+
+    def eat(self):
+        print("所有猫类都要吃东西")
+
+
+class Tiger(BaseCat):
+    '''
+    老虎
+    '''
+    tag = "老虎"
+
+    def eat(self):
+        super(Tiger, self).eat()
+        print("我还喜欢吃肉")
+
+
+class Panda(BaseCat):
+    '''
+    熊猫类
+    '''
+    tag = "熊猫类"
+
+    def eat(self):
+        super(Panda, self).eat()
+        print("我还喜欢吃竹子")
+
+
+panda = Panda('yuan zi')
+panda.eat()
+# 所有猫类都要吃东西 \n 我还喜欢吃竹子
+# 子类eat函数 没有super(Panda, self).eat() 我还喜欢吃竹子
+# Panda 里面没有eat方法，则执行父类eat方法   # 所有猫类都要吃东西
+#
+"""
+
+"""
+class Person(object):
+
+
+# 重写实例对象的构造（初始化）方法
+
+    def __init__(self, name, gender):
+        self.name = name
+        self.gender = gender
+
+    # 自定义实例方法，格式化打印实例属性name的值
+    def speak(self):
+        print("hello ! 我是{}".format(self.name))
+
+    # 自定义实例方法，占位作用
+    def relation(self):
+        pass
+
+class Student(Person):
+    # 重写实例对象的构造（初始化）方法，并调用父类构造方法，实现对实例属性的赋值
+    def __init__(self, name, gender,score, major):
+        super(Person, self).__init__(name, gender)
+        self.score = score
+        self.major = major
+        self.__stu_num = "2018014002"
+
+    # 自定义实例方法，格式化打印实例属性stu_num的值
+    def speak(self):
+        # super(Student, self).speak()
+        print("我的学号为{}，很高兴认识大家". format(self.__stu_num))
+
+    # 自定义实例方法，判断学号是否为既定值，并根据判断结构 进行分类打印
+    def identify_stu(self):
+        if self.__stu_num == '2018014002':
+            print("我的分组已经完成")
+        else:
+            print("请稍后，马上为你自动分组")
+
+    # 自定义实例方法，设置实例对象的学号为传入的值
+    def set_num(self, new_num):
+        self.__stu_num = new_num
+
+    # 自定义实例方法，判断该类是否为Person类的子类，并进行分类打印
+    def relation(self):
+        if issubclass(Student, Person):
+            print("我的父类是Person")
+        else:
+            print("父类正在查询中······")
+
+
+if __name__ == '__main__':
+    stu = Student('小明', '男', 90, '数学')
+    # 调用speak方法 打印stu对应的值
+    stu.speak()
+    # 调用实例方法 鉴别学号是否为指定值
+    stu.identify_stu()
+    # 调用实例方法 鉴别实例对象所属的类的父类是否为Person
+    stu.relation()
+
+    print("******************")
+    stu_2 = Student('小红', '女', 89, '英语')
+    # 调用实例方法 设置stu_2的学号为'2018040625'
+    stu.set_num('2018040625')
+    # 调用实例方法 打印stu_2对应的值
+    stu.speak()
+    # 调用实例方法 鉴别学号是否为指定值
+    stu.identify_stu()
+"""
+
+# ####类的多重继承
+# class C(A, B)
+
+# ####类的多态
+"""
+class BaseCat(object):
+    '''
+    猫科动物的基础类
+    '''
+    tag = "猫科动物"
+
+    def __init__(self, name):
+        print('BaseCat init')
+        self.name = name
+
+    def eat(self):
+        print("所有猫类都要吃东西")
+
+
+class Tiger(BaseCat):
+    '''
+    老虎
+    '''
+    tag = "老虎"
+
+    def __init__(self, name, color):
+        print('tiger init')
+
+        super(Tiger, self).__init__(name)
+        self.color = color
+
+    def eat(self):
+        super(Tiger, self).eat()
+        print("我还喜欢吃肉")
+
+    def show(self):
+        print("{},{}".format(self.name, self.color))
+
+
+panda = Tiger('yuan zi', 'yellow')
+panda.show()
+"""
+
+
+# ######### 类的高级特性property
+# 1.@property: 将类的方法当作属性来使用
+# 2.__slots__:静态属性列表
+# _slots__方法用元组定义允许绑定的属性名称和方法名而不是列表
+"""
+class BaseCat(object):
+    '''
+    猫科动物的基础类
+    '''
+    tag = "猫科动物"
+
+    __slots__ = ('name','__age')
+    def __init__(self, name, age):
+        print('BaseCat init')
+        self.name = name
+        self.__age = age
+
+    # 私有属性的获取
+    @property
+    def age(self):
+        return self.__age
+
+    # 私有属性的修改
+    @age.setter
+    def age(self, value):
+        if not isinstance(value, int):
+            print("不合法")
+            return
+        if value < 0 or value > 100:
+            print("不合法")
+            return
+        self.__age = value
+
+    @property
+    def show_info(self):
+        print("{},{}".format(self.name, self.age))
+
+    def __str__(self):
+        return "{}".format(self.name)
+
+class Tiger(BaseCat):
+    __slots__ = ('color')
+
+
+small_cat = BaseCat('hua hua', 2)
+small_cat.show_info     # hua hua,2
+
+print(small_cat)  # hua hua   __str__
+
+# print(small_cat.get_age)  # 'BaseCat' object has no attribute 'age'
+
+small_cat.age = 6  # 私有属性如何修改，
+small_cat.show_info  # hua hua,6
+
+# 使用__slots__后不允许给实例添加新的属性
+# small_cat.color = '白色'  # __slots__  AttributeError: 'BaseCat' object has no attribute 'color'
+
+tiger = Tiger('ddd', 5)
+# small_cat.color = '白色'      # AttributeError: 'BaseCat' object has no attribute 'color'
+tiger.color = '白色'
+print(tiger.color)  # 白色    # 白色
+
+"""
+
+# ###########类的静态方法和实例方法
+
+class Cat(object):
+
+    tag = 'cat'
+
+    def __init__(self, name):
+        print('BaseCat init')
+        self.name = name
+
+    @staticmethod
+    def breath():
+        print('猫都需要呼吸空气')
+
+    # def show_info(self):
+    #     print('类的属性{}，对象的属性{}'.format(self.tag, self.name))
+    @classmethod
+    def show_info(cls):
+        print('类的属性{}，对象的属性{}'.format(cls.tag, cls.name))   # type object 'Cat' has no attribute 'name'
+
+
+if __name__ == '__main__':
+    Cat.breath()
+
+    small_cat = Cat('money')
+    small_cat.breath()
+    # small_cat.show_info()
+>>>>>>> 8db3581ebd1f247c3c33c02f16e461db64801a0d
