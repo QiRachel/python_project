@@ -1648,7 +1648,6 @@ pip uninstall Flask
 virtualenv
 pipenv
 """
-<<<<<<< HEAD
 """
 virtualenv
 不同的包版本
@@ -1816,11 +1815,7 @@ whence：可选，默认值为 0。给 offset 定义一个参数，表示要从�
 rest = lambda x, y: x ** 2 + y ** 3
 print(rest(y=2, x=3))
 print(range(10))
-
-
-
-
-
+"""
 
 """
 from functools import reduce
@@ -1839,7 +1834,7 @@ print(list(map(charToNum, "23443")))
 r1 = reduce(fn, map(charToNum, "23443"))
 print(r1)
 print(type(r1))
-=======
+"""
 
 #   ######################类
 # #类的属性和方法
@@ -2217,4 +2212,3 @@ if __name__ == '__main__':
     small_cat = Cat('money')
     small_cat.breath()
     # small_cat.show_info()
->>>>>>> 8db3581ebd1f247c3c33c02f16e461db64801a0d
