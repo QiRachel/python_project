@@ -1648,3 +1648,193 @@ pip uninstall Flask
 virtualenv
 pipenv
 """
+"""
+virtualenv
+不同的包版本
+
+1.安装 virtualenv  
+pip install virtualenv
+
+2.新建目录 保存虚拟环境  mkdir venvs
+3.cd venvs
+4.virtualenv vname
+5.cd vname/Script
+6.进入虚拟环境 activate
+7.安装需要的包 如pip install django=1.11
+
+进入／退出   activate/ deactivate
+
+为了方便切换环境可以进行如下操作，安装
+# pip install virtualenvwrapper-win  window版本
+pip install virtualenvwrapper
+切换虚拟环境 workon vname
+
+"""
+
+"""
+pipenv
+不同的python版本
+
+pipenv --help
+
+1.安装 pipenv              pip install pipenv
+2.新建目录保存虚拟环境       如 mkdir py2.6
+3.cd py2.6
+4.安装版本       如 python pipenv --version 2.6(本地需要有2.6的版本)
+5.安装需要的包    如 pipenv install django (切记是pipenv 不是pip)
+6.pipenv shell
+7.退出 exit
+
+"""
+# ####################常用高阶函数
+# #######lambda
+"""
+lambda是一种表达式，创建简单的匿名函数
+
+lambda函数是一种用来处理简单的业务的函数定义，使用lambda关键字定义的函数没有函数名，且后跟的语句只有一行，所以lambda函数又称lambda表达式
+"""
+"""
+stus = [
+    {"name":"alice","age":18},
+    {"name":"nana","age":20},
+    {"name":"david","age":15}
+]
+stus.sort(key=lambda x : x['age'])
+print(stus)
+# [{'name': 'david', 'age': 15}, {'name': 'alice', 'age': 18}, {'name': 'nana', 'age': 20}]
+# 先要根据年龄对列表stus进行升序排序（先通过匿名函数得到age所对应的值）
+"""
+
+# #######filter
+"""
+过滤器
+返回一个filter对象，返回对其执行函数时结果为真的所有元素
+filter(fun,seq)
+"""
+"""
+res = filter(lambda n:n%2==0,[1,2,3,4,5])
+print(res)  # <filter object at 0x10c09aa20>
+print(list(res))  # [2, 4]
+
+def use_filter(data):
+    # 使用result接收filter过滤偶数值的功能
+    result = filter(lambda x: x % 2 == 0, data)
+    return result
+
+if __name__ == '__main__':
+    # 使用data接收0-50的数值
+    data = range(0, 51)
+    # 调用use_filter函数传入data,使用result变量接收
+    result = use_filter(data)
+    print(list(result))
+"""
+
+# #######map
+"""
+对指定序列包含的项执行指定函数返回的值
+map(func,seq,...)
+返回一个map对象
+
+当map()函数中传入的列表多于一个时，map()函数可以并行执行
+map(function, iterable, ...)
+参数
+function -- 函数
+iterable -- 一个或多个序列
+提供了两个或者多个列表，对相同位置的列表数据按照lambda函数进行计算。
+"""
+
+"""
+res = map(lambda x,y: x *y,[3,5],[3,5])
+print(list(res))    # [9, 25]
+
+def use_map(data):
+    # 使用result接收map实现各个元素的5次方功能
+    result = map(lambda x:pow(x, 5) ,data)
+    return result
+
+if __name__ == '__main__':
+    data = (2,4,6,8,10,12)
+    # 调用use_map函数传入data，使用result接收
+    result = use_map(data)
+    print(tuple(result))
+"""
+
+# #######reduce
+"""
+需要引入模块
+from functools import reduce
+使用指定的函数将序列元素合二为一，返回一个结果
+"""
+"""
+# 从functools 中导入reduce函数
+from functools import reduce
+def use_reduce(data):
+    # 使用result接收reduce实现20的阶乘
+    result = reduce(lambda x,y: x * y,data)
+    print(result)
+# 测试该功能
+if __name__ == '__main__':
+    # 使用data接收一个1-20的数值
+    data = range(1, 21)
+    # 调用use_reduce函数传入data
+    use_reduce(data)
+    
+"""
+
+# #####文件的读写模式
+"""
+ open() 方法用于打开一个文件，并返回文件对象
+ +号在文件读写模式中，表示读写模式，应与其他模式结合使用，如r（只读）、w（可写）、a（追加），关于文件读写只能选择一种读写模式，不可以联合使用
+ 
+ 1.
+ f = open("")
+ f.close()
+ 
+ 2.with open("") as f：
+
+ 自动关闭
+ 
+ 
+ f.read()
+ f.read(10)
+ fileObject.seek(offset[, whence])
+ 参数
+offset -- 开始的偏移量，也就是代表需要移动偏移的字节数，如果是负数表示从倒数第几位开始。
+offset -- 开始的偏移量，也就是代表需要移动偏移的字节数，如果是负数表示从倒数第几位开始。
+whence：可选，默认值为 0。给 offset 定义一个参数，表示要从哪个位置开始偏移；0 代表从文件开头开始算起，1 代表从当前位置开始算起，2 代表从文件末尾算起。
+
+ f.seek(10)  随机读取，表示从文件起始位置偏移10个字符从第11个字符位置开始读取
+ f.readline() 换行读取,若文件内容为中文时，需设置编码格式encoding='utf-8'，才可正常读取
+ f.readlines() 读取所有行
+ 
+ f.write()
+ f.writelines()
+"""
+
+"""
+rest = lambda x, y: x ** 2 + y ** 3
+print(rest(y=2, x=3))
+print(range(10))
+
+
+
+
+
+
+"""
+from functools import reduce
+
+
+def fn(x, y):
+    return x * 10 + y
+
+
+def charToNum(s):
+    dict = {"0": 0, "1": 1, "2": 2, "3": 3, "4": 4}
+    return dict[s]
+
+
+print(list(map(charToNum, "23443")))
+r1 = reduce(fn, map(charToNum, "23443"))
+print(r1)
+print(type(r1))
